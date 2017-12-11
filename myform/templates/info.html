@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User accuount</title>
+</head>
+<body>
+ {% if user.is_authenticated %}
+    <h1>You've succesfully registered ! </h1>
+      <h2>You'r user name is {{ user.get_username }}</h2>
+      <br>
+      <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+  {% endif %}
+</body>
+</html>

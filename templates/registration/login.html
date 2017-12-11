@@ -1,0 +1,48 @@
+{% extends "base_generic.html" %}
+{% block title %}<title>Login</title>{% endblock %}
+{% block content %}
+
+
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+
+<div>
+  <p>{{ form.username.label_tag }}</p>
+  <p>{{ form.username }}</p>
+</div>
+<div>
+  <p>{{ form.password.label_tag }}</p>
+  <p>{{ form.password }}</p>
+</div>
+
+<div>
+  <input type="submit" value="login" />
+  <input type="hidden" name="next" value="{{ next }}" />
+</div>
+</form>
+<br>
+{% if user.is_authenticated %}
+<li><h2>User: {{ user.get_username }}</h2></li>
+    <a href="{% url 'logout'%}"><button class="button button5">Click here to logout</button></a>
+  {% endif %}
+      <br>
+
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+{# Assumes you setup the password_reset view in your URLconf #}
+<p><a href="{% url 'password_reset' %}"></a></p>
+
+{% endblock %}

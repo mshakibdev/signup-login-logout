@@ -1,0 +1,8 @@
+{% extends "base_generic.html" %}
+{% block title %}<title>Log out</title>{% endblock %}
+{% block content %}
+<head></head>
+<h2>Logged out!</h2>
+
+<a href="{% url 'login'%}"><button class="button button1">Click here to login again.</button></a>
+{% endblock %}
